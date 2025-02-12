@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/archana-singh-1/fashion_nest_backend#readme",
   "dependencies": {
-    "express.js": "^1.0.0"
+    "dotenv": "^16.4.7",
+    "express.js": "^1.0.0",
+    "route": "^0.2.5"
   }
 }
