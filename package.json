@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/archana-singh-1/fashion_nest_backend/issues"
   },
-  "homepage": "https://github.com/archana-singh-1/fashion_nest_backend#readme"
+  "homepage": "https://github.com/archana-singh-1/fashion_nest_backend#readme",
+  "dependencies": {
+    "express.js": "^1.0.0"
+  }
 }
