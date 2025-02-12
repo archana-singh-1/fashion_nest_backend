@@ -11,6 +11,13 @@
         "src": "/api/products/(.*)",
         "dest": "express.js"
       }
-    ]
+    ],
+    
+        "functions": {
+          "app/api/**/*": {
+            "maxDuration": 5
+          }
+        }
+      
   }
   
