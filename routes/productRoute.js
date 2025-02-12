@@ -4,7 +4,7 @@ import product from '../model/product.js';
 const route=router()
 
 route.get("/product", async (req, res) => {
-    const products = await product.find();
+    const products = await product.find().maxTimeMS(5000);;
     res.json(products);
     console.log("get products")
 });
