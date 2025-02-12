@@ -3,7 +3,7 @@ import product from '../model/product.js';
 
 const route=router()
 
-route.get("/products", async (req, res) => {
+route.get("/product", async (req, res) => {
     const products = await product.find();
     res.json(products);
     console.log("get products")
