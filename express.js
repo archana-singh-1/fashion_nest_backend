@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors';
 import mongoose from 'mongoose';
 import route from './routes/productRoute.js';
+import authRoutes from './routes/authRoutes.js'
 
 
 const app=express()
@@ -27,7 +28,7 @@ app.get("/",(req,res)=>{
     console.log("Done")
 })
 
-
+app.use("/api/auth", authRoutes);
 app.use("/api/products",route)
 
 app.listen(PORT,function(){
