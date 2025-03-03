@@ -10,6 +10,30 @@ route.get("/product", async (req, res) => {
     console.log("get products")
 });
 
+route.get("/search", async (req, res) => {
+    try {
+        const { query } = req.query;
+
+        if (!query || query.trim() === "") {
+            return res.status(400).json({ message: "Search query is required" });
+        }
+
+        const products = await product.find({
+            $or: [
+                { name: { $regex: query, $options: "i" } },
+                { category: { $regex: query, $options: "i" } },
+                { description: { $regex: query, $options: "i" } }
+            ]
+        });
+
+        res.json(products.length ? products : { message: "No matching products found" });
+    } catch (error) {
+        console.error("Error in search:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
 
 route.post("/post", async (req, res) => {
     try {
@@ -51,6 +75,9 @@ route.put("/update/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "Failed to update product", details: error.message });
     }
+
+
+
 });
 
 export default route;
