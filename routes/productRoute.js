@@ -1,6 +1,8 @@
+import mongoose from 'mongoose';
 import router from 'express'
 import product from '../model/product.js';
-import mongoose from 'mongoose';
+import Cart from '../model/cartSchema.js';
+
 
 const route=router()
 
@@ -74,10 +76,33 @@ route.put("/update/:id", async (req, res) => {
         res.json({ message: "Product updated successfully", product: updatedProduct });
     } catch (error) {
         res.status(500).json({ error: "Failed to update product", details: error.message });
-    }
+}
+
+});
+const getEstimatedDeliveryDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() + 7);
+    return today.toISOString().split("T")[0];
+}
+route.post("/add-to-cart", async (req, res) => {
+    const { productId, name, price, image } = req.body;
+
+    const newCartItem = new Cart({
+        productId,
+        name,
+        price,
+        image,
+        estimatedDelivery: getEstimatedDeliveryDate(),
+    });
+
+    await newCartItem.save();
+    res.json({ message: "Item added to cart successfully", newCartItem });
+});
 
 
-
+route.get("/cart-items", async (req, res) => {
+    const cartItems = await Cart.find();
+    res.json(cartItems);
 });
 
 export default route;
