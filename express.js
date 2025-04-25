@@ -17,9 +17,7 @@ const mongoDbUrl = process.env.mongoDb;
 
 
 mongoose.connect(mongoDbUrl,{
-    dbName: "b_net",  
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    serverSelectionTimeoutMS: 5000
 })
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));

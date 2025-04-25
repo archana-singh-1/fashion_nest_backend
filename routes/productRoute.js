@@ -8,7 +8,7 @@ const route=router()
 
 route.get("/product", async (req, res) => {
     const products = await product.find().maxTimeMS(5000);;
-    res.json(products);
+    res.send(products);
     console.log("get products")
 });
 
